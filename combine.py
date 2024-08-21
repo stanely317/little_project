@@ -26,11 +26,11 @@ def get_data_from_sql():
     data = []
     for row in rows:
         data.append({
-            'c1': row[1],
-            'c2': row[2],
-            'c3': row[3],
-            'c4': row[5],
-            'c5': row[4],
+            'title': row[1],
+            'content': row[2],
+            'date': row[3],
+            'category': row[4],
+            'comments': row[5],
         })
     return data
 
@@ -43,7 +43,7 @@ def save_data_to_sql(data):
     cursor.execute('''
         INSERT INTO 文章 (標題, 內容, 文章種類)
         VALUES (?, ?, ?)
-    ''', (data['column1'], data['column2'], data['column3']))
+    ''', (data['title'], data['words'], data['category']))
 
     conn.commit()
     conn.close()
@@ -68,7 +68,11 @@ def data():
          
 @app.route('/')
 def index():
-    return render_template('data.html') 
+    return render_template('home.html') 
+
+@app.route('/chat')
+def chatpage():
+    return render_template('chat.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

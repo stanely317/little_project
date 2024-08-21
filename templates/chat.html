@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>新增文章</title>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="../static/style.css" />
   </head>
   <body>
+    <!-- header區塊(上半部) -->
     <div class="header">
       <div class="button_home">
         <div class="hamburger" onclick="toggleSidebar()">
@@ -15,7 +16,7 @@
           <div></div>
         </div>
         <div>
-          <a href="./home.html">首頁</a>
+          <a href="http://127.0.0.1:5000/">首頁</a>
         </div>
       </div>
       <div class="search-bar">
@@ -27,7 +28,9 @@
       </div>
     </div>
 
+    <!-- 下半部(含sidebar、文章) -->
     <div style="display: flex; position: relative;">
+      <!-- sidebar區塊 -->
       <div class="sidebar" id="sidebar">
         <ul>
           <!-- <li>站點問題</li> -->
@@ -40,33 +43,18 @@
         </ul>
       </div>
 
+      <!-- 內容(文章)區塊 -->
       <div class="content" style="justify-content: center">
+        <!-- 文章列表區 -->
         <div class="article_block" style="width: 50%">
           <h2>閒聊 > 文章列表</h2>
-          <div class="article">
-            <h3>新聞1226</h3>
-            <p>位置: 新聞</p>
-            <p>留言數: 1</p>
-            <p>日期: 2023-12-26 06:46</p>
-          </div>
-          <div class="article">
-            <h3>新聞1226</h3>
-            <p>位置: 新聞</p>
-            <p>留言數: 1</p>
-            <p>日期: 2023-12-26 06:46</p>
-          </div>
-          <div class="article">
-            <h3>新聞1226</h3>
-            <p>位置: 新聞</p>
-            <p>留言數: 1</p>
-            <p>日期: 2023-12-26 06:46</p>
-          </div>
         </div>
-        <div class="article_block" style="width: 50%">
+        <!-- 新增文章區 -->
+        <div style="width: 50%">
           <h2>閒聊 > 新增文章</h2>
           <div class="article">
-            <form action="" id="dataForm">
-              <div style="height: 1.5rem; display: grid;">
+            <form id="insert-form">
+              <div style="height: 1.5rem; display: grid; ">
                 <label for="title" style="font-size: 1.15rem;">文章標題</label>
                 <input type="text" name="title" id="title" style="height: 1.5rem;" placeholder="請輸入標題">
               </div>
@@ -74,6 +62,7 @@
                 <label for="words" style="font-size: 1.15rem">文章內容</label>
                 <textarea rows="10" name="words" id="words" placeholder="請輸入內容"></textarea>
               </div>
+              <!-- <button type="submit">提交</button> -->
               <input type="submit" value="提交">
             </form>
             
@@ -96,16 +85,16 @@
       //     toggleSidebar();
       //   }
       // };
-      document.getElementById('dataForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // 防止表單提交刷新頁面
+      // document.getElementById('dataForm').addEventListener('submit', function(e) {
+      //       e.preventDefault(); // 防止表單提交刷新頁面
             
-            const data = {
-                column1: document.getElementById('title').value,
-                column2: document.getElementById('words').value
-            };
+      //       const data = {
+      //           column1: document.getElementById('title').value,
+      //           column2: document.getElementById('words').value
+      //       };
 
-            console.log(data.column1, data.column2);
-      });      
+      //       console.log(data.column1, data.column2);
+      // });      
       window.onload = function () {
         toggleSidebar(); // 頁面載入時自動呼叫
       };
@@ -127,5 +116,6 @@
         }
       }
     </script>
+    <script src="../static/chat_sql.js"></script>
   </body>
 </html>

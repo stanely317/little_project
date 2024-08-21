@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>文章頁</title>
+    <link rel="stylesheet" href="../static/style.css"/>
+  </head>
+  <body>
+    <div class="header">
+        <div class="button_home">
+          <div class="hamburger" onclick="toggleSidebar()">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div>
+            <a href="http://127.0.0.1:5000/">首頁</a>
+          </div>
+        </div>
+        <div class="search-bar">
+          <input type="text" placeholder="Search" />
+          <select>
+            <option>文章標題</option>
+          </select>
+          <button>搜尋</button>
+        </div>
+      </div>
+
+    <div style="display: flex; position: relative;">
+      <div class="sidebar" id="sidebar">
+        <ul>
+          <li>
+            <a href="http://127.0.0.1:5000/chat">閒聊</a>
+          </li>
+          <li>新聞</li>
+          <li>政治</li>
+          <li>遊戲</li>
+        </ul>
+      </div>
+      <div class="content" style="flex-direction: column; align-items: center; height: 100vh;">
+        <div class="article_block" style="width: 45%">
+          <h2>閒聊 > 文章</h2>
+          <div class="article">
+            <h3>文章標題</h3>
+            <h4>文章內容</h4>
+            <p style="text-align: right; font-size: 0.8rem;">發佈時間: 2023-12-26 06:46</p>
+          </div>
+        </div>
+        <div class="article_block" style="width: 45%">
+            <h2>留言</h2>
+            <div class="article">
+              <input type="text" placeholder="請輸入留言內容" style="width: 100%;">
+              <input type="submit" value="提交">
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <script>
+      function toggleSidebar() {
+        let sidebar = document.getElementById("sidebar");
+        let hamburger = document.querySelector(".hamburger");
+        let mainContent = document.querySelector(".content");
+        
+        // 切換側邊欄顯示
+        sidebar.classList.toggle("visible");
+        hamburger.classList.toggle("selected");
+
+        // 切換主要內容區域的 margin-left
+        if (sidebar.classList.contains("visible")) {
+          mainContent.style.marginLeft = "15%";
+        } else {
+          mainContent.style.marginLeft = "0";
+        }
+      }
+    </script>
+  </body>
+</html>
