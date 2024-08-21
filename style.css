@@ -1,0 +1,150 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.button_home{
+    display: flex;
+    align-items: center;
+    width: 15%;
+}
+
+.sidebar {
+    /* padding: 10px; */
+    position: absolute;
+    left: -15%; /* 隱藏在螢幕左側 */
+    width: 15%; /* 側邊欄寬度 */
+    height: 100%;
+    background-color: #e0e0e0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: left 0.3s ease;
+    z-index: 1000;
+    bottom: 0;
+}
+
+/* 側邊欄顯示時 */
+.sidebar.visible {
+    left: 0;
+    /* top: 0; */
+}
+
+/* 漢堡按鈕樣式 */
+.hamburger {
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+    z-index: 1001;
+    /* background-color: transparent; */
+    transition: background-color 0.3s ease;
+    border: 0.5rem solid #f5f5f5;
+    left: 0;
+}
+
+.hamburger:hover {
+    background-color: #e0e0e0; 
+    /* 滑過時的顏色 */
+}
+
+.hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 5px 0;
+    transition: background-color 0.3s ease;
+}
+
+.hamburger.selected {
+    /* 側邊欄顯示時的按鈕背景顏色 */
+    border: 0.5rem solid #e0e0e0;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 1.25rem 1rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.sidebar ul li:hover {
+    background-color: #00000060;
+    font-weight: bold;
+}
+
+.content {
+  width: 100%;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  display: flex;
+  transition: margin-left 0.3s ease;
+  margin-left: 0;
+}
+
+/* .sidebar.visible ~ .content {
+    margin-left: 15%;
+} */
+
+.content h2 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+.header {
+  padding: 0.75rem;
+  background-color: #f5f5f5;
+  /* overflow-y: auto; */
+  /* max-height: 100vh; */
+  display: flex;
+  justify-content: space-between;
+  font-size: 2rem;
+  /* position: fixed; */
+  height: 50%;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.article {
+  margin: 0 1rem 0.85rem;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+.article h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.article p {
+  margin: 5px 0;
+}
+
+.search-bar {
+  display: flex;
+  width: 45%;
+
+  /* justify-content: right; */
+  /* 置右對齊 */
+}
+
+.search-bar input[type="text"] {
+  width: 45%;
+  /* padding: 5px; */
+  /* margin: 0.15rem; */
+  font-size: 1.25rem;
+  margin: 0.1rem;
+}
+
+.search-bar select,
+.search-bar button {
+  /* padding: 5px; */
+  /* margin: 0.15rem; */
+  font-size: 1.25rem;
+  margin: 0.1rem;
+}
