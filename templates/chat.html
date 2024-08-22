@@ -31,7 +31,7 @@
     <!-- 下半部(含sidebar、文章) -->
     <div style="display: flex; position: relative;">
       <!-- sidebar區塊 -->
-      <div class="sidebar" id="sidebar">
+      <div class="sidebar" id="sidebar" style="height: 100%;">
         <ul>
           <!-- <li>站點問題</li> -->
           <li>
@@ -55,20 +55,16 @@
           <div class="article">
             <form id="insert-form">
               <div style="height: 1.5rem; display: grid; ">
-                <label for="title" style="font-size: 1.15rem;">文章標題</label>
-                <input type="text" name="title" id="title" style="height: 1.5rem;" placeholder="請輸入標題">
+                <label for="title" style="font-size: 1.25rem;">文章標題</label>
+                <input type="text" name="title" id="title" style="height: 1.5rem; font-size: 1.3rem;" placeholder="請輸入標題">
               </div>
               <div style="display: grid; margin: 2.25rem 0 0.4rem ;">
-                <label for="words" style="font-size: 1.15rem">文章內容</label>
-                <textarea rows="10" name="words" id="words" placeholder="請輸入內容"></textarea>
+                <label for="words" style="font-size: 1.25rem">文章內容</label>
+                <textarea rows="10" name="words" id="words" placeholder="請輸入內容" style="font-size: 1.15rem;"></textarea>
               </div>
               <!-- <button type="submit">提交</button> -->
-              <input type="submit" value="提交">
+              <input type="submit" value="提交" style="height: 2.2rem;">
             </form>
-            
-            <!-- <p>位置: 閒聊</p>
-            <p>留言數: 13</p>
-            <p>日期: 2023-12-25 07:15</p> -->
           </div>
         </div>
       </div>

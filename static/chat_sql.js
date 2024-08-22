@@ -32,7 +32,7 @@ fetch("/data")
       articleDiv.appendChild(pDate);
 
       // 將最新的文章插入在最上方
-      articleBlock.insertBefore(articleDiv, articleBlock.firstChild);
+      articleBlock.insertBefore(articleDiv, articleBlock.children[1]);
     });
   });
 
@@ -61,10 +61,10 @@ document
       .then((response) => response.json())
       .then((result) => {
         if (result.status === "success") {
-          alert("資料提交成功");
+          alert("已成功新增文章");
           location.reload(); // 刷新頁面以更新表格
         } else {
-          alert("資料提交失敗: " + result.message);
+          alert("資料提交失敗，原因: " + result.message);
         }
       })
       .catch((error) => {
