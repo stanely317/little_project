@@ -41,30 +41,20 @@
       <div class="content" style="flex-direction: column; height: 100vh; align-items: center;">
         <div class="article_block" style="width: 85%;">
           <h2>閒聊 > 文章</h2>
-          <div class="article">
-            <h2>文章標題</h2>
-            <h3>文章內容</h3>
-            <p style="text-align: right; font-size: 1rem;">發佈時間: 2023-12-26 06:46</p>
-          </div>
+          <!-- 文章插入區域 -->
         </div>
         <div class="article_block" style="width: 70%;">
             <h2>留言</h2>
-            <div class="article" style="height: 5vh; padding-bottom: 0.85rem;">
-              <input type="text" placeholder="請輸入留言內容" style="width: 80%; height: 100%; font-size: 1.1rem;">
-              <input type="submit" value="送出" style="height: 115%; width: 10%; margin-left: 1rem;">
+            <div class="article" style="height: 5vh; align-items: center;">
+              <form id="insert_comments">
+                  <input name="comment" type="text" placeholder="請輸入留言內容" style="width: 80%; height: 100%; font-size: 1.1rem;">
+                  <input type="submit" value="送出" style="height: 115%; width: 10%; margin-left: 1rem;">
+              </form>
             </div>
           </div>
       </div>
-      <div class="article_block" style="width: 60%">
+      <div class="comment_block" style="width: 60%">
         <h2>留言列表</h2>
-        <div class="article">
-          <p class="comments">留言1</p>
-          <p class="comments_time">留言時間: 2023-12-26 06:46</p>
-        </div>
-        <div class="article">
-            <p class="comments">留言1</p>
-            <p class="comments_time">留言時間: 2023-12-26 06:46</p>
-          </div>
       </div>
     </div>
 
@@ -86,5 +76,6 @@
         }
       }
     </script>
+    <script src="../static/article_comment.js"></script>
   </body>
 </html>
