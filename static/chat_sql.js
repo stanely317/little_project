@@ -4,9 +4,6 @@ fetch("/data")
   .then((data) => {
     const articleBlock = document.querySelector(".article_block");
     // 新增文章列表上方標題
-    let head = document.createElement("h2");
-    head.textContent = `> 文章列表`;
-    articleBlock.appendChild(head);
    
     data.forEach((row) => {
       // Create article div
@@ -16,7 +13,7 @@ fetch("/data")
       // 標題
       const h3 = document.createElement("h3");
       const link = document.createElement("a");
-      link.href = `/article?id=${row.id}`;
+      link.href = `/article/${row.id}`;
       link.textContent = row.title;
       h3.appendChild(link);
       articleDiv.appendChild(h3);

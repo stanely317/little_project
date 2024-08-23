@@ -1,20 +1,25 @@
 // 取得URL中的文章ID
-const urlParams = new URLSearchParams(window.location.search);
-const articleID = urlParams.get('id');
+const pathSegments = window.location.pathname.split("/");
+const articleID = pathSegments[pathSegments.length - 1];
 
-// 之後看上面的articleID能不能取代掉id(0823)
-let id; // 用來儲存文章ID(為了insert用)
-let category; // 用來儲存類別(同上)
+let category; // 用來儲存類別(從fetch拿到，再給到addeventlistener)
 
 // 查詢資料並顯示在表格中
-fetch(`/content?id=${articleID}`)
+fetch(`/content/${articleID}`)
   .then((response) => response.json())
   .then((data) => {
     const articleBlock = document.querySelector(".article_block");
     const commentBlock = document.querySelector(".comment_block");
     let article = data.article;
     let comment = data.comment;
+    console.log(article);
+
     article.forEach((row) => {
+      // 動態生成文章上方小標題
+      let head = document.createElement("h2");
+      head.textContent = `${row.category} > 文章`;
+      articleBlock.appendChild(head);
+
       // Create article div
       const articleDiv = document.createElement("div");
       articleDiv.className = "article";
@@ -50,7 +55,6 @@ fetch(`/content?id=${articleID}`)
 
       // 將最新的文章插入在最上方
       articleBlock.insertBefore(articleDiv, articleBlock.children[1]);
-      id = row.id;
       category = row.category;
     });
     comment.forEach((row) => {
@@ -60,7 +64,7 @@ fetch(`/content?id=${articleID}`)
 
       // 留言內容 (因為輸入不是textarea所以沒有處理換行)
       const pComment = document.createElement("p");
-      pComment.className = "comments"
+      pComment.className = "comments";
       pComment.textContent = row.article_comment;
       articleDiv.appendChild(pComment);
 
@@ -89,10 +93,9 @@ document
     const formData = new FormData(this);
     const data = {};
     formData.forEach((value, key) => (data[key] = value));
-    data["id"] = id;
+    data["id"] = articleID;
     data["category"] = category;
-    // console.log(data);
-    fetch("/content", {
+    fetch(`/content/${articleID}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),

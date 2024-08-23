@@ -103,6 +103,42 @@ def get_comments_from_article(id):
         })
     return data
 
+def search_for_sql(keywords, type):
+    conn = pyodbc.connect(connection_string)
+    cursor = conn.cursor()
+    query = ""
+    if type == '標題' or type == '內容':
+        query = f"SELECT * FROM 文章 WHERE {type} LIKE ?"
+    else:
+        query = f"SELECT * FROM 留言 WHERE {type} LIKE ?"
+
+    cursor.execute(query, ('%' + keywords + '%',))
+    # 獲取資料
+    rows = cursor.fetchall()
+    # 關閉連接
+    conn.close()
+    # 將資料回傳依照type給予對應欄位與key值
+    data = []
+    if type == '標題' or type == '內容':
+        for row in rows:
+            data.append({
+                'id' : row[0],
+                'title': row[1],
+                'content': row[2],
+                'date': row[3],
+                'category': row[4],
+                'comments': row[5],
+        })
+    else:
+        for row in rows:
+            data.append({
+                'comment_id' : row[0],
+                'article_id': row[1],
+                'article_comment': row[2],
+                'date': row[3]
+            })        
+    return data
+
 @app.route('/data', methods=['GET', 'POST'])
 def data():
     if request.method == 'POST':
@@ -120,8 +156,15 @@ def data():
         data = get_data_from_sql()
         return jsonify(data)
 
-@app.route('/content', methods=['GET', 'POST'])
-def content():
+@app.route('/search/<string:keywords>/<string:type>', methods=['GET'])
+def search(keywords, type):
+    print(f"Keywords: {keywords}, Type: {type}", "before search DB")
+    result = search_for_sql(keywords, type)
+    print(result, "after searching and get data")
+    return jsonify(result)
+
+@app.route('/content/<int:article_id>', methods=['GET', 'POST'])
+def content(article_id):
     if request.method == 'POST':
     # 這是處理新增資料的邏輯
         data = request.get_json()
@@ -134,7 +177,7 @@ def content():
             return jsonify({'status': 'error', 'message': str(e)}), 500
     else:
         # 從請求路由接收文章ID
-        article_id = request.args.get('id')
+        # article_id = request.args.get('id')
         # 這是處理查詢資料的邏輯
         article = get_content_from_article(article_id)
         comment = get_comments_from_article(article_id)
@@ -154,8 +197,9 @@ def index():
 def chatpage():
     return render_template('chat.html')
 
-@app.route('/article')
-def article_page():
+@app.route('/article/<int:article_id>')
+def article_page(article_id):
+    print(article_id)
     return render_template('single_article.html');
 
 if __name__ == '__main__':

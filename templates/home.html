@@ -19,13 +19,15 @@
         </div>
       </div>
       <div class="search-bar">
-        <input type="text" placeholder="Search" />
-        <select>
-          <option>文章標題</option>
-          <option>文章內容</option>
-          <option>留言</option>
-        </select>
-        <button>搜尋</button>
+        <form id="search-form" class="search-form">
+          <input type="text" name="keywords" placeholder="Search" />
+          <select name="type">
+            <option>標題</option>
+            <option>內容</option>
+            <option>留言內容</option>
+          </select>
+          <input type="submit" value="搜尋">
+        </form>
       </div>
     </div>
 
@@ -105,5 +107,6 @@
         }
       }
     </script>
+    <script src="../static/search_sql.js"></script>
   </body>
 </html>

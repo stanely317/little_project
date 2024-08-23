@@ -142,18 +142,23 @@ a {
   /* 置右對齊 */
 }
 
-.search-bar input[type="text"] {
-  width: 45%;
-  /* padding: 5px; */
+.search-form {
+  display: flex;
+  width: 100%;
+}
+
+.search-bar > form input[type="text"] {
+  width: 40%;
+  padding: 0.2rem;
   /* margin: 0.15rem; */
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   margin: 0.1rem;
 }
 
-.search-bar select,
-.search-bar button {
+.search-bar > form select,
+.search-bar > form input {
   /* padding: 5px; */
   /* margin: 0.15rem; */
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   margin: 0.1rem;
 }
