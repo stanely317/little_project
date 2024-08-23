@@ -3,7 +3,11 @@ fetch("/data")
   .then((response) => response.json())
   .then((data) => {
     const articleBlock = document.querySelector(".article_block");
-
+    // 新增文章列表上方標題
+    let head = document.createElement("h2");
+    head.textContent = `> 文章列表`;
+    articleBlock.appendChild(head);
+   
     data.forEach((row) => {
       // Create article div
       const articleDiv = document.createElement("div");
@@ -11,12 +15,15 @@ fetch("/data")
 
       // 標題
       const h3 = document.createElement("h3");
-      h3.textContent = row.title; //
+      const link = document.createElement("a");
+      link.href = `/article?id=${row.id}`;
+      link.textContent = row.title;
+      h3.appendChild(link);
       articleDiv.appendChild(h3);
 
       // 類別
       const pCategory = document.createElement("p");
-      pCategory.textContent = `位置: ${row.category}`; 
+      pCategory.textContent = `分類: ${row.category}`;
       articleDiv.appendChild(pCategory);
 
       // 留言數
@@ -26,8 +33,11 @@ fetch("/data")
 
       // 時間
       const pDate = document.createElement("p");
-      const tmp_Date = new Date(row.date);  // // 轉換時間格式
-      const formattedDate = tmp_Date.toISOString().slice(0, 19).replace('T', ' ');
+      const tmp_Date = new Date(row.date); // // 轉換時間格式
+      const formattedDate = tmp_Date
+        .toISOString()
+        .slice(0, 19)
+        .replace("T", " ");
       pDate.textContent = `發佈時間: ${formattedDate}`;
       articleDiv.appendChild(pDate);
 
@@ -45,12 +55,12 @@ document
     const data = {};
     formData.forEach((value, key) => (data[key] = value));
     // 藉由路徑來判斷文章類別
-    if (window.location.pathname.includes('news')) {
-        data['category'] = '新聞';
-    } else if (window.location.pathname.includes('chat')) {
-        data['category'] = '閒聊';
+    if (window.location.pathname.includes("news")) {
+      data["category"] = "新聞";
+    } else if (window.location.pathname.includes("chat")) {
+      data["category"] = "閒聊";
     } else {
-        data['category'] = '其他';
+      data["category"] = "其他";
     }
     console.log(data);
     fetch("/data", {

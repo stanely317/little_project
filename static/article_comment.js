@@ -1,8 +1,13 @@
+// 取得URL中的文章ID
+const urlParams = new URLSearchParams(window.location.search);
+const articleID = urlParams.get('id');
+
+// 之後看上面的articleID能不能取代掉id(0823)
 let id; // 用來儲存文章ID(為了insert用)
 let category; // 用來儲存類別(同上)
 
 // 查詢資料並顯示在表格中
-fetch("/content")
+fetch(`/content?id=${articleID}`)
   .then((response) => response.json())
   .then((data) => {
     const articleBlock = document.querySelector(".article_block");
@@ -82,12 +87,11 @@ document
   .addEventListener("submit", function (event) {
     event.preventDefault();
     const formData = new FormData(this);
-    console.log(formData);
     const data = {};
     formData.forEach((value, key) => (data[key] = value));
     data["id"] = id;
     data["category"] = category;
-    console.log(data);
+    // console.log(data);
     fetch("/content", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

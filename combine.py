@@ -133,9 +133,11 @@ def content():
             print(f"Error occurred: {e}")
             return jsonify({'status': 'error', 'message': str(e)}), 500
     else:
+        # 從請求路由接收文章ID
+        article_id = request.args.get('id')
         # 這是處理查詢資料的邏輯
-        article = get_content_from_article(9)
-        comment = get_comments_from_article(9)
+        article = get_content_from_article(article_id)
+        comment = get_comments_from_article(article_id)
 
         # 將兩者合併到一個字典裡
         response_data = {
