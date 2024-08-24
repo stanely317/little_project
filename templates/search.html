@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>首頁</title>
+    <title>搜尋結果</title>
     <link rel="stylesheet" href="../static/style.css" />
   </head>
   <body>
@@ -15,15 +15,11 @@
           <div></div>
         </div>
         <div>
-          <a href="#">首頁</a>
+          <a href="/">首頁</a>
         </div>
       </div>
       <div class="search-bar">
-        <form
-          id="search-form"
-          class="search-form"
-          onsubmit="return get_search_string(event);"
-        >
+        <form id="search-form" class="search-form">
           <input type="text" name="keywords" placeholder="Search" />
           <select name="type">
             <option>標題</option>
@@ -38,7 +34,6 @@
     <div style="display: flex; position: relative">
       <div class="sidebar" id="sidebar">
         <ul>
-          <!-- <li>站點問題</li> -->
           <li>
             <a href="http://127.0.0.1:5000/chat">閒聊</a>
           </li>
@@ -47,8 +42,11 @@
           <li>遊戲</li>
         </ul>
       </div>
-      <div class="content">
-        <div class="article_block" style="width: 50%">
+      <div
+        class="content"
+        style="flex-direction: column; height: 100vh; align-items: center"
+      >
+        <div class="article_block" style="width: 45%">
           <h2>最新文章</h2>
           <div class="article">
             <h3>新聞1226</h3>
@@ -67,27 +65,6 @@
             <p>位置: 新聞</p>
             <p>留言數: 1</p>
             <p>日期: 2023-12-26 06:46</p>
-          </div>
-          <div class="article">
-            <h3>新聞1226</h3>
-            <p>位置: 新聞</p>
-            <p>留言數: 1</p>
-            <p>日期: 2023-12-26 06:46</p>
-          </div>
-          <div class="article">
-            <h3>新聞1226</h3>
-            <p>位置: 新聞</p>
-            <p>留言數: 1</p>
-            <p>日期: 2023-12-26 06:46</p>
-          </div>
-        </div>
-        <div class="article_block" style="width: 50%">
-          <h2>最多留言文章</h2>
-          <div class="article">
-            <h3>數學家怎麼漆油漆？</h3>
-            <p>位置: 閒聊</p>
-            <p>留言數: 13</p>
-            <p>日期: 2023-12-25 07:15</p>
           </div>
         </div>
       </div>
@@ -110,28 +87,11 @@
           mainContent.style.marginLeft = "0";
         }
       }
-
-      function get_search_string(event) {
-        // 停止表單的預設提交行為
-        event.preventDefault();
-
-        const formData = new FormData(document.getElementById("search-form"));
-        const data = {};
-        formData.forEach((value, key) => {
-          data[key] = value.trim(); // 去除空格
-        });
-
-        // 生成新的URL
-        let search_string = `/search?keywords=${encodeURIComponent(
-          data.keywords
-        )}&type=${encodeURIComponent(data.type)}`;
-
-        // 使用新URL進行跳轉
-        window.location.href = search_string;
-
-        // 為了保持頁面跳轉，返回false阻止表單提交
-        return false;
-      }
+      const urlParams = new URLSearchParams(window.location.search);
+      const keywords = urlParams.get("keywords");
+      const type = urlParams.get("type");
+      console.log(keywords,type);
     </script>
+    <!-- <script src="../static/article_comment.js"></script> -->
   </body>
 </html>

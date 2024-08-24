@@ -156,9 +156,8 @@ def data():
         data = get_data_from_sql()
         return jsonify(data)
 
-@app.route('/search/<string:keywords>/<string:type>', methods=['GET'])
+@app.route('/searchDB/<string:keywords>/<string:type>', methods=['GET'])
 def search(keywords, type):
-    print(f"Keywords: {keywords}, Type: {type}", "before search DB")
     result = search_for_sql(keywords, type)
     print(result, "after searching and get data")
     return jsonify(result)
@@ -197,9 +196,15 @@ def index():
 def chatpage():
     return render_template('chat.html')
 
+@app.route('/search')
+def searchpage():
+    keywords = request.args.get('keywords')
+    type = request.args.get('type')
+    print(keywords, type)
+    return render_template('search.html')
+
 @app.route('/article/<int:article_id>')
 def article_page(article_id):
-    print(article_id)
     return render_template('single_article.html');
 
 if __name__ == '__main__':
