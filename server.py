@@ -2,7 +2,6 @@ from flask import Flask, render_template, jsonify, request
 import pyodbc
 
 app = Flask(__name__)
-
 connection_string = (
     'DRIVER={SQL Server};'
     'SERVER=172.25.9.255;'
@@ -11,10 +10,21 @@ connection_string = (
     'PWD=qwe123'
 )
 
-def get_data_from_sql():
+def get_article_from_sql(category):
     conn = pyodbc.connect(connection_string)
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM 文章')
+    type = ''
+    if category == 'chat':
+        type = '閒聊'
+    elif category == 'news':
+        type = '新聞'
+    elif category == 'sports':
+        type = '運動'
+    else:
+        type = '遊戲'
+    cursor.execute(
+        '''SELECT * FROM 文章 WHERE 文章.文章種類 = ?''',(type)
+    )
 
     # 獲取資料
     rows = cursor.fetchall()
@@ -110,7 +120,13 @@ def search_for_sql(keywords, type):
     if type == '標題' or type == '內容':
         query = f"SELECT * FROM 文章 WHERE {type} LIKE ?"
     else:
-        query = f"SELECT * FROM 留言 WHERE {type} LIKE ?"
+        # 搜尋留言內容時，還需要聯表查詢文章標題
+        query = """
+            SELECT 留言.留言ID, 留言.文章ID, 留言.留言內容, 留言.留言時間, 文章.標題
+            FROM 留言
+            JOIN 文章 ON 留言.文章ID = 文章.文章ID
+            WHERE 留言.留言內容 LIKE ?
+        """
 
     cursor.execute(query, ('%' + keywords + '%',))
     # 獲取資料
@@ -132,29 +148,25 @@ def search_for_sql(keywords, type):
     else:
         for row in rows:
             data.append({
-                'comment_id' : row[0],
+                'comment_id': row[0],
                 'article_id': row[1],
                 'article_comment': row[2],
-                'date': row[3]
+                'date': row[3],
+                'title': row[4],  # 添加文章標題
             })        
     return data
 
-@app.route('/data', methods=['GET', 'POST'])
+@app.route('/data', methods=['POST'])
 def data():
-    if request.method == 'POST':
     # 這是處理新增資料的邏輯
-        data = request.get_json()
-        print(data)
-        try:
-            save_data_to_sql(data)
-            return jsonify({'status': 'success'}), 200
-        except Exception as e:
-            print(f"Error occurred: {e}")
-            return jsonify({'status': 'error', 'message': str(e)}), 500
-    else:
-        # 這是處理查詢資料的邏輯
-        data = get_data_from_sql()
-        return jsonify(data)
+    data = request.get_json()
+    print(data)
+    try:
+        save_data_to_sql(data)
+        return jsonify({'status': 'success'}), 200
+    except Exception as e:
+        print(f"Error occurred: {e}")
+        return jsonify({'status': 'error', 'message': str(e)}), 500
 
 @app.route('/searchDB/<string:keywords>/<string:type>', methods=['GET'])
 def search(keywords, type):
@@ -188,13 +200,20 @@ def content(article_id):
         }
         return jsonify(response_data)
 
+@app.route('/category/<string:category>')
+def get_articles(category):
+    # 根據類別取得文章數據
+    print(category)
+    articles = get_article_from_sql(category)
+    return jsonify(articles)
+
 @app.route('/')
 def index():
     return render_template('home.html') 
 
-@app.route('/chat')
-def chatpage():
-    return render_template('chat.html')
+@app.route('/<string:category>')
+def article_list(category):
+    return render_template('article.html')
 
 @app.route('/search')
 def searchpage():

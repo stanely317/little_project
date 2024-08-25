@@ -16,35 +16,48 @@
           <div></div>
         </div>
         <div>
-          <a href="http://127.0.0.1:5000/">首頁</a>
+          <a href="/">首頁</a>
         </div>
       </div>
       <div class="search-bar">
-        <input type="text" placeholder="Search" />
-        <select>
-          <option>文章標題</option>
-        </select>
-        <button>搜尋</button>
+        <form
+          id="search-form"
+          class="search-form"
+          onsubmit="return get_search_string(event);"
+        >
+          <input type="text" name="keywords" placeholder="Search" />
+          <select name="type">
+            <option>標題</option>
+            <option>內容</option>
+            <option>留言內容</option>
+          </select>
+          <input type="submit" value="搜尋" />
+        </form>
       </div>
     </div>
 
     <!-- 下半部(含sidebar、文章) -->
-    <div style="display: flex; position: relative;">
+    <div style="display: flex; position: relative; height: 100vh;">
       <!-- sidebar區塊 -->
-      <div class="sidebar" id="sidebar" style="height: 100%;">
+      <div class="sidebar" id="sidebar">
         <ul>
-          <!-- <li>站點問題</li> -->
           <li>
-            <a href="#" style="font-weight: bold"> - 閒聊 -</a>
+            <a href="/chat" id="chat"> 閒聊 </a>
           </li>
-          <li>新聞</li>
-          <li>政治</li>
-          <li>遊戲</li>
+          <li>
+            <a href="/news" id="news"> 新聞 </a>
+          </li>
+          <li>
+            <a href="/games" id="games"> 遊戲 </a>
+          </li>
+          <li>
+            <a href="/sports" id="sports"> 運動 </a>
+          </li>
         </ul>
       </div>
 
       <!-- 內容(文章)區塊 -->
-      <div class="content" style="justify-content: center">
+      <div class="content" style="justify-content: center;">
         <!-- 文章列表區 -->
         <div class="article_block" style="width: 50%">
           <h2>> 文章列表</h2>
@@ -92,6 +105,6 @@
         }
       }
     </script>
-    <script src="../static/chat_sql.js"></script>
+    <script src="../static/article_list.js"></script>
   </body>
 </html>

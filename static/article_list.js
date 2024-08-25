@@ -1,9 +1,28 @@
+const currentUrl = window.location.pathname;
+const category = currentUrl.substring(1);
+let category_string;
+// 藉由路徑來判斷文章類別
+if (window.location.pathname.includes("chat")) {
+  category_string = "閒聊";
+} else if (window.location.pathname.includes("news")) {
+  category_string = "新聞";
+} else if (window.location.pathname.includes("sports")) {
+  category_string = "運動";
+} else if (window.location.pathname.includes("games")) {
+  category_string = "遊戲";
+} else {
+  category_string = "其他";
+}
+
+let a_tag = document.getElementById(category);
+a_tag.textContent = ` - ${category_string} - `;
+a_tag.style = 'font-weight:bold';
+
 // 查詢資料並顯示在表格中
-fetch("/data")
+fetch(`/category/${category}`)
   .then((response) => response.json())
   .then((data) => {
     const articleBlock = document.querySelector(".article_block");
-    // 新增文章列表上方標題
    
     data.forEach((row) => {
       // Create article div
@@ -51,15 +70,9 @@ document
     const formData = new FormData(this);
     const data = {};
     formData.forEach((value, key) => (data[key] = value));
-    // 藉由路徑來判斷文章類別
-    if (window.location.pathname.includes("news")) {
-      data["category"] = "新聞";
-    } else if (window.location.pathname.includes("chat")) {
-      data["category"] = "閒聊";
-    } else {
-      data["category"] = "其他";
-    }
+    data['category'] = category_string;
     console.log(data);
+    
     fetch("/data", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

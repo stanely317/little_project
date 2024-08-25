@@ -36,11 +36,6 @@ fetch(`/content/${articleID}`)
       pContent.innerHTML = output_content;
       articleDiv.appendChild(pContent);
 
-      // 留言數
-      //   const pComments = document.createElement("p");
-      //   pComments.textContent = `留言數: ${row.comments}`;
-      //   articleDiv.appendChild(pComments);
-
       // 時間
       const pDate = document.createElement("p");
       pDate.className = "comments_time";

@@ -35,20 +35,25 @@
       </div>
     </div>
 
-    <div style="display: flex; position: relative">
+    <div style="display: flex; position: relative; height: 100vh">
       <div class="sidebar" id="sidebar">
         <ul>
-          <!-- <li>站點問題</li> -->
           <li>
-            <a href="http://127.0.0.1:5000/chat">閒聊</a>
+            <a href="/chat">閒聊</a>
           </li>
-          <li>新聞</li>
-          <li>政治</li>
-          <li>遊戲</li>
+          <li>
+            <a href="/news">新聞</a>
+          </li>
+          <li>
+            <a href="/sports">運動</a>
+          </li>
+          <li>
+            <a href="/games">遊戲</a>
+          </li>
         </ul>
       </div>
       <div class="content">
-        <div class="article_block" style="width: 50%">
+        <div class="newest_article_five" style="width: 50%">
           <h2>最新文章</h2>
           <div class="article">
             <h3>新聞1226</h3>
@@ -56,32 +61,8 @@
             <p>留言數: 1</p>
             <p>日期: 2023-12-26 06:46</p>
           </div>
-          <div class="article">
-            <h3>新聞1226</h3>
-            <p>位置: 新聞</p>
-            <p>留言數: 1</p>
-            <p>日期: 2023-12-26 06:46</p>
-          </div>
-          <div class="article">
-            <h3>新聞1226</h3>
-            <p>位置: 新聞</p>
-            <p>留言數: 1</p>
-            <p>日期: 2023-12-26 06:46</p>
-          </div>
-          <div class="article">
-            <h3>新聞1226</h3>
-            <p>位置: 新聞</p>
-            <p>留言數: 1</p>
-            <p>日期: 2023-12-26 06:46</p>
-          </div>
-          <div class="article">
-            <h3>新聞1226</h3>
-            <p>位置: 新聞</p>
-            <p>留言數: 1</p>
-            <p>日期: 2023-12-26 06:46</p>
-          </div>
         </div>
-        <div class="article_block" style="width: 50%">
+        <div class="most_comments_five" style="width: 50%">
           <h2>最多留言文章</h2>
           <div class="article">
             <h3>數學家怎麼漆油漆？</h3>
@@ -111,27 +92,7 @@
         }
       }
 
-      function get_search_string(event) {
-        // 停止表單的預設提交行為
-        event.preventDefault();
-
-        const formData = new FormData(document.getElementById("search-form"));
-        const data = {};
-        formData.forEach((value, key) => {
-          data[key] = value.trim(); // 去除空格
-        });
-
-        // 生成新的URL
-        let search_string = `/search?keywords=${encodeURIComponent(
-          data.keywords
-        )}&type=${encodeURIComponent(data.type)}`;
-
-        // 使用新URL進行跳轉
-        window.location.href = search_string;
-
-        // 為了保持頁面跳轉，返回false阻止表單提交
-        return false;
-      }
-    </script>
+      </script>
+    <script src="../static/header_tool.js"></script>
   </body>
 </html>

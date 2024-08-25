@@ -47,51 +47,13 @@
         style="flex-direction: column; height: 100vh; align-items: center"
       >
         <div class="article_block" style="width: 45%">
-          <h2>最新文章</h2>
-          <div class="article">
-            <h3>新聞1226</h3>
-            <p>位置: 新聞</p>
-            <p>留言數: 1</p>
-            <p>日期: 2023-12-26 06:46</p>
-          </div>
-          <div class="article">
-            <h3>新聞1226</h3>
-            <p>位置: 新聞</p>
-            <p>留言數: 1</p>
-            <p>日期: 2023-12-26 06:46</p>
-          </div>
-          <div class="article">
-            <h3>新聞1226</h3>
-            <p>位置: 新聞</p>
-            <p>留言數: 1</p>
-            <p>日期: 2023-12-26 06:46</p>
+          <!-- 查詢結果顯示插入區塊 -->
           </div>
         </div>
       </div>
     </div>
 
-    <script>
-      function toggleSidebar() {
-        let sidebar = document.getElementById("sidebar");
-        let hamburger = document.querySelector(".hamburger");
-        let mainContent = document.querySelector(".content");
-
-        // 切換側邊欄顯示
-        sidebar.classList.toggle("visible");
-        hamburger.classList.toggle("selected");
-
-        // 切換主要內容區域的 margin-left
-        if (sidebar.classList.contains("visible")) {
-          mainContent.style.marginLeft = "15%";
-        } else {
-          mainContent.style.marginLeft = "0";
-        }
-      }
-      const urlParams = new URLSearchParams(window.location.search);
-      const keywords = urlParams.get("keywords");
-      const type = urlParams.get("type");
-      console.log(keywords,type);
-    </script>
-    <!-- <script src="../static/article_comment.js"></script> -->
+    <script src="../static/header_tool.js"></script>
+    <script src="../static/searchDB.js"></script>
   </body>
 </html>
