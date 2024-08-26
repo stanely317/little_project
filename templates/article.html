@@ -25,7 +25,7 @@
           class="search-form"
           onsubmit="return get_search_string(event);"
         >
-          <input type="text" name="keywords" placeholder="Search" />
+          <input type="text" name="keywords" placeholder="請輸入想搜尋的內容" />
           <select name="type">
             <option>標題</option>
             <option>內容</option>
@@ -87,24 +87,8 @@
       window.onload = function () {
         toggleSidebar(); // 頁面載入時自動呼叫
       };
-
-      function toggleSidebar() {
-        let sidebar = document.getElementById("sidebar");
-        let hamburger = document.querySelector(".hamburger");
-        let mainContent = document.querySelector(".content");
-
-        // 切換側邊欄顯示
-        sidebar.classList.toggle("visible");
-        hamburger.classList.toggle("selected");
-
-        // 切換主要內容區域的 margin-left
-        if (sidebar.classList.contains("visible")) {
-          mainContent.style.marginLeft = "15%";
-        } else {
-          mainContent.style.marginLeft = "0";
-        }
-      }
     </script>
     <script src="../static/article_list.js"></script>
+    <script src="../static/header_tool.js"></script>
   </body>
 </html>

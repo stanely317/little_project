@@ -24,7 +24,7 @@
           class="search-form"
           onsubmit="return get_search_string(event);"
         >
-          <input type="text" name="keywords" placeholder="Search" />
+          <input type="text" name="keywords" placeholder="請輸入想搜尋的內容" />
           <select name="type">
             <option>標題</option>
             <option>內容</option>
@@ -45,31 +45,21 @@
             <a href="/news">新聞</a>
           </li>
           <li>
-            <a href="/sports">運動</a>
+            <a href="/games">遊戲</a>
           </li>
           <li>
-            <a href="/games">遊戲</a>
+            <a href="/sports">運動</a>
           </li>
         </ul>
       </div>
       <div class="content">
         <div class="newest_article_five" style="width: 50%">
           <h2>最新文章</h2>
-          <div class="article">
-            <h3>新聞1226</h3>
-            <p>位置: 新聞</p>
-            <p>留言數: 1</p>
-            <p>日期: 2023-12-26 06:46</p>
-          </div>
+          <!-- 建立時間最新的五篇文章 -->
         </div>
         <div class="most_comments_five" style="width: 50%">
           <h2>最多留言文章</h2>
-          <div class="article">
-            <h3>數學家怎麼漆油漆？</h3>
-            <p>位置: 閒聊</p>
-            <p>留言數: 13</p>
-            <p>日期: 2023-12-25 07:15</p>
-          </div>
+          <!-- 留言最多的五篇文章 -->
         </div>
       </div>
     </div>
@@ -94,5 +84,6 @@
 
       </script>
     <script src="../static/header_tool.js"></script>
+    <script src="../static/home_page.js"></script>
   </body>
 </html>

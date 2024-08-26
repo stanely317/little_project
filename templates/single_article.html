@@ -25,7 +25,7 @@
           class="search-form"
           onsubmit="return get_search_string(event);"
         >
-          <input type="text" name="keywords" placeholder="Search" />
+          <input type="text" name="keywords" placeholder="請輸入想搜尋的內容" />
           <select name="type">
             <option>標題</option>
             <option>內容</option>
@@ -40,16 +40,16 @@
       <div class="sidebar" id="sidebar">
         <ul>
           <li>
-            <a href="/chat" id="chat"> 閒聊 </a>
+            <a href="/chat">閒聊</a>
           </li>
           <li>
-            <a href="/news" id="news"> 新聞 </a>
+            <a href="/news">新聞</a>
           </li>
           <li>
-            <a href="/games" id="games"> 遊戲 </a>
+            <a href="/games">遊戲</a>
           </li>
           <li>
-            <a href="/sports" id="sports"> 運動 </a>
+            <a href="/sports">運動</a>
           </li>
         </ul>
       </div>
@@ -60,10 +60,10 @@
         </div>
         <div class="article_block" style="width: 70%;">
             <h2>留言</h2>
-            <div class="article" style="height: 5vh; align-items: center;">
+            <div class="article" style="height: 5vh;">
               <form id="insert_comments">
-                  <input name="comment" type="text" placeholder="請輸入留言內容" style="width: 80%; height: 100%; font-size: 1.1rem;">
-                  <input type="submit" value="送出" style="height: 115%; width: 10%; margin-left: 1rem;">
+                  <input name="comment" type="text" placeholder="請輸入留言內容" style="width: 80%; height: 4.5vh; font-size: 1.1rem;">
+                  <input type="submit" value="送出" style="height: 115%; width: 10%; margin-left: 1rem; height: 5vh">
               </form>
             </div>
           </div>
@@ -73,24 +73,8 @@
       </div>
     </div>
 
-    <script>
-      function toggleSidebar() {
-        let sidebar = document.getElementById("sidebar");
-        let hamburger = document.querySelector(".hamburger");
-        let mainContent = document.querySelector(".content");
-        
-        // 切換側邊欄顯示
-        sidebar.classList.toggle("visible");
-        hamburger.classList.toggle("selected");
-
-        // 切換主要內容區域的 margin-left
-        if (sidebar.classList.contains("visible")) {
-          mainContent.style.marginLeft = "15%";
-        } else {
-          mainContent.style.marginLeft = "0";
-        }
-      }
     </script>
     <script src="../static/article_comment.js"></script>
+    <script src="../static/header_tool.js"></script>
   </body>
 </html>

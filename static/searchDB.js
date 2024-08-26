@@ -96,7 +96,7 @@ function displayComment(row, articleBlock) {
         .toISOString()
         .slice(0, 19)
         .replace("T", " ");
-      pDate.textContent = `發佈時間: ${formattedDate}`;
+      pDate.textContent = `留言時間: ${formattedDate}`;
       commentDiv.appendChild(pDate);
     
       // 將最新的留言插入在最上方

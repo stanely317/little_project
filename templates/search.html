@@ -19,8 +19,12 @@
         </div>
       </div>
       <div class="search-bar">
-        <form id="search-form" class="search-form">
-          <input type="text" name="keywords" placeholder="Search" />
+        <form
+          id="search-form"
+          class="search-form"
+          onsubmit="return get_search_string(event);"
+        >
+          <input type="text" name="keywords" placeholder="請輸入想搜尋的內容" />
           <select name="type">
             <option>標題</option>
             <option>內容</option>
@@ -35,11 +39,17 @@
       <div class="sidebar" id="sidebar">
         <ul>
           <li>
-            <a href="http://127.0.0.1:5000/chat">閒聊</a>
+            <a href="/chat">閒聊</a>
           </li>
-          <li>新聞</li>
-          <li>政治</li>
-          <li>遊戲</li>
+          <li>
+            <a href="/news">新聞</a>
+          </li>
+          <li>
+            <a href="/games">遊戲</a>
+          </li>
+          <li>
+            <a href="/sports">運動</a>
+          </li>
         </ul>
       </div>
       <div

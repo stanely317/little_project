@@ -156,6 +156,33 @@ def search_for_sql(keywords, type):
             })        
     return data
 
+def home_page_article(block):
+    conn = pyodbc.connect(connection_string)
+    cursor = conn.cursor()
+    query = f'''
+        SELECT TOP 5 *
+        FROM 文章
+        ORDER BY {block} DESC'''
+    cursor.execute(query)
+
+    # 獲取資料
+    rows = cursor.fetchall()
+    # 關閉連接
+    conn.close()
+    # 將資料轉換為字典列表
+    data = []
+    for row in rows:
+        data.append({
+            'id' : row[0],
+            'title': row[1],
+            'content': row[2],
+            'date': row[3],
+            'category': row[4],
+            'comments': row[5],
+        })
+    return data
+
+
 @app.route('/data', methods=['POST'])
 def data():
     # 這是處理新增資料的邏輯
@@ -206,6 +233,17 @@ def get_articles(category):
     print(category)
     articles = get_article_from_sql(category)
     return jsonify(articles)
+
+@app.route('/home')
+def get_top_five():
+    most_new = home_page_article("時間")
+    most_comments = home_page_article("留言數量")
+    response_data = {
+        'newest_five': most_new,
+        'comments_five': most_comments
+    }
+    return jsonify(response_data)
+
 
 @app.route('/')
 def index():
