@@ -4,9 +4,9 @@ import pyodbc
 app = Flask(__name__)
 connection_string = (
     'DRIVER={SQL Server};'
-    'SERVER=172.25.9.255;'
-    'DATABASE=練習18;'
-    'UID=sa;'
+    'SERVER=34.81.75.116;'
+    'DATABASE=BakDB;'
+    'UID=sqlserver;'
     'PWD=qwe123'
 )
 
